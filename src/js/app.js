@@ -54,7 +54,10 @@ searchEl.addEventListener(
         }
         if (countries.length > 1) {
           const countriesList = countries
-            .map(country => `<li>${country.name.common}</li>`)
+            .map(
+              country =>
+                `<li class="country-list-item"><img src="${country.flags.png}" alt="${country.name.common}" width="40"> ${country.name.common}</li>`
+            )
             .join("");
           countryListEl.innerHTML = countriesList;
           countryInfoEl.innerHTML = "";
