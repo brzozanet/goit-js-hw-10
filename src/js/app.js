@@ -26,8 +26,10 @@ const countryInfoEl = document.querySelector(".country-info");
 // };
 
 const displayCountry = country => {
-  const { name, capital, population, languages, flags } = country;  
-  const languagesList = Object.values(languages).map(language => language).join(", ");
+  const { name, capital, population, languages, flags } = country;
+  const languagesList = Object.values(languages)
+    .map(language => language)
+    .join(", ");
   const countryInfo = `
     <div class="country-info__flag">
       <img src="${flags.png}" alt="${flags.alt}" title="${flags.alt}" width="300">
