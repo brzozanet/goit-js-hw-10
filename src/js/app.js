@@ -84,7 +84,7 @@ searchEl.addEventListener(
         // countryInfoEl.innerHTML = "";
       })
       .catch(error => {
-        Notiflix.Notify.failure("Oops, error fetching data from server");
+        Notiflix.Notify.failure("Oops, there is no country with that name.");
         countryListEl.innerHTML = "";
         countryInfoEl.innerHTML = "";
       });
