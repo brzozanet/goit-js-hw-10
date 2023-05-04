@@ -8,30 +8,41 @@ const searchEl = document.querySelector("#search-box");
 const countryListEl = document.querySelector(".country-list");
 const countryInfoEl = document.querySelector(".country-info");
 
+// const displayCountry = country => {
+//   const { name, capital, population, languages, flags } = country;
+//   const languagesList = languages.map(language => language.name).join(", ");
+//   const countryInfo = `
+//     <div class="country-info__flag">
+//       <img src="${flags.png}" alt="${flags.alt}" title="${flags.alt}" width="300">
+//     </div>
+//     <div class="country-info__text">
+//       <h2 class="country-info__name">${name.common}</h2>
+//       <p class="country-info__capital"><b>Capital:</b> ${capital}</p>
+//       <p class="country-info__population"><b>Population:</b> ${population}</p>
+//       <p class="country-info__languages"><b>Languages:</b> ${languagesList}</p>
+//     </div>
+//   `;
+//   countryInfoEl.innerHTML = countryInfo;
+// };
+
 const displayCountry = country => {
   const { name, capital, population, languages, flags } = country;
-  const languagesList = languages.map(language => language.name).join(", ");
+  
+  console.log(languages);
+
   const countryInfo = `
     <div class="country-info__flag">
-      <img src="${flags.png}" alt="${name.common}" width="300">
+      <img src="${flags.png}" alt="${flags.alt}" title="${flags.alt}" width="300">
     </div>
     <div class="country-info__text">
       <h2 class="country-info__name">${name.common}</h2>
       <p class="country-info__capital"><b>Capital:</b> ${capital}</p>
       <p class="country-info__population"><b>Population:</b> ${population}</p>
-      <p class="country-info__languages"><b>Languages:</b> ${languagesList}</p>
+      <p class="country-info__languages"><b>Languages:</b> ${languages}</p>
     </div>
   `;
   countryInfoEl.innerHTML = countryInfo;
 };
-
-// displayCountry({
-//   name: { common: "Ukraine" },
-//   capital: "Kyiv",
-//   population: 41660960,
-//   languages: [{ name: "Ukrainian" }],
-//   flags: { png: "https://flagcdn.com/w320/ua.png" },
-// });
 
 searchEl.addEventListener(
   "input",
@@ -56,7 +67,7 @@ searchEl.addEventListener(
           const countriesList = countries
             .map(
               country =>
-                `<li class="country-list-item"><img src="${country.flags.png}" alt="${country.name.common}" width="40"> ${country.name.common}</li>`
+                `<li class="country-list-item"><img src="${country.flags.png}" title="${country.flags.alt}" alt="${country.flags.alt}" width="40"> ${country.name.common}</li>`
             )
             .join("");
           countryListEl.innerHTML = countriesList;
