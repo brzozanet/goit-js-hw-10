@@ -1,7 +1,7 @@
-import "./css/styles.css";
+import "../css/styles.css";
 import Notiflix from "notiflix";
 import debounce from "lodash/debounce";
-import { fetchCountries } from "./js/fetchCountries.js";
+import { fetchCountries } from "./fetchCountries.js";
 
 const DEBOUNCE_DELAY = 1000;
 const searchEl = document.querySelector("#search-box");
@@ -54,7 +54,7 @@ searchEl.addEventListener(
           return;
         }
         if (countries.length === 1) {
-          displayCountry(countries[0]);
+          displayCountry(country[0]);
           countryListEl.innerHTML = "";
           return;
         }
