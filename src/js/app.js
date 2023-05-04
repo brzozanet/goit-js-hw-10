@@ -26,10 +26,8 @@ const countryInfoEl = document.querySelector(".country-info");
 // };
 
 const displayCountry = country => {
-  const { name, capital, population, languages, flags } = country;
-  
-  console.log(languages);
-
+  const { name, capital, population, languages, flags } = country;  
+  const languagesList = Object.values(languages).map(language => language).join(", ");
   const countryInfo = `
     <div class="country-info__flag">
       <img src="${flags.png}" alt="${flags.alt}" title="${flags.alt}" width="300">
@@ -38,7 +36,7 @@ const displayCountry = country => {
       <h2 class="country-info__name">${name.common}</h2>
       <p class="country-info__capital"><b>Capital:</b> ${capital}</p>
       <p class="country-info__population"><b>Population:</b> ${population}</p>
-      <p class="country-info__languages"><b>Languages:</b> ${languages}</p>
+      <p class="country-info__languages"><b>Languages:</b> ${languagesList}</p>
     </div>
   `;
   countryInfoEl.innerHTML = countryInfo;
@@ -75,7 +73,6 @@ searchEl.addEventListener(
           return;
         }
         if (countries.length === 1) {
-          console.log(countries[0]);
           displayCountry(countries[0]);
           countryListEl.innerHTML = "";
           return;
