@@ -25,13 +25,13 @@ const displayCountry = country => {
   countryInfoEl.innerHTML = countryInfo;
 };
 
-displayCountry({
-  name: { common: "Ukraine" },
-  capital: "Kyiv",
-  population: 41660960,
-  languages: [{ name: "Ukrainian" }],
-  flags: { png: "https://flagcdn.com/w320/ua.png" },
-});
+// displayCountry({
+//   name: { common: "Ukraine" },
+//   capital: "Kyiv",
+//   population: 41660960,
+//   languages: [{ name: "Ukrainian" }],
+//   flags: { png: "https://flagcdn.com/w320/ua.png" },
+// });
 
 searchEl.addEventListener(
   "input",
@@ -61,8 +61,8 @@ searchEl.addEventListener(
           return;
         }
         if (countries.length === 1) {
-          console.log(countries);
-          displayCountry(countries);
+          console.log(countries[0]);
+          displayCountry(countries[0]);
           countryListEl.innerHTML = "";
           return;
         }
