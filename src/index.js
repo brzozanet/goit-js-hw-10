@@ -1,7 +1,7 @@
 import "./css/styles.css";
 import Notiflix from "notiflix";
 import debounce from "lodash/debounce";
-import fetchCountries from "./js/fetchCountries";
+import { fetchCountries } from "./js/fetchCountries.js";
 
 const DEBOUNCE_DELAY = 300;
 const searchEl = document.querySelector("#search-box");
@@ -26,18 +26,43 @@ const displayCountry = country => {
   console.log(countryInfo);
 };
 
-displayCountry({
-  name: { common: "Poland" },
-  capital: "Warsaw",
-  population: 38413000,
-  languages: [{ name: "Polish" }],
-  flags: { png: "https://flagcdn.com/w320/pl.png" },
-});
-
-
-const debouncedFunction = debounce(event => {
+searchEl.addEventListener("input", debounce(event => {
   const searchQuery = event.target.value.trim();
-  console.log(searchQuery);
-}, DEBOUNCE_DELAY);
+  if (searchQuery.length === 0) {
+    countryListEl.innerHTML = "";
+    countryInfoEl.innerHTML = "";
+    return;
+  }
+  fetchCountries(searchQuery)
+    .then(countries => {
+      if (countries.length > 10) {
+        Notiflix.Notify.info("Too many matches found. Please enter a more specific name.");
+        countryListEl.innerHTML = "";
+        countryInfoEl.innerHTML = "";
+        return;
+      }
+      if (countries.length > 1) {
+        const countriesList = countries.map(country => `<li>${country.name.common}</li>`).join("");
+        countryListEl.innerHTML = countriesList;
+        countryInfoEl.innerHTML = "";
+        return;
+      }
+      if (countries.length === 1) {
+        displayCountry(countries[0]);
+        countryListEl.innerHTML = "";
+        return;
+      }
+      Notiflix.Notify.failure("Oops, error fetching data from server");
+      countryListEl.innerHTML = "";
+      countryInfoEl.innerHTML = "";
+    })
+    .catch(error => {
+      Notiflix.Notify.failure("Oops, error fetching data from server");
+      countryListEl.innerHTML = "";
+      countryInfoEl.innerHTML = "";
+    });
+}, DEBOUNCE_DELAY));
 
-searchEl.addEventListener("input", debouncedFunction);
+fetchCountries("Po");
+fetchCountries("Poland");
+

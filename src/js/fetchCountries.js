@@ -12,5 +12,5 @@ export function fetchCountries(countryName) {
     );
 }
 
-fetchCountries("sw");
-fetchCountries("Poland");
+// fetchCountries("sw");
+// fetchCountries("Poland");
