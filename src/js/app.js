@@ -3,7 +3,7 @@ import Notiflix from "notiflix";
 import debounce from "lodash/debounce";
 import { fetchCountries } from "./fetchCountries.js";
 
-const DEBOUNCE_DELAY = 1000;
+const DEBOUNCE_DELAY = 300;
 const searchEl = document.querySelector("#search-box");
 const countryListEl = document.querySelector(".country-list");
 const countryInfoEl = document.querySelector(".country-info");
@@ -23,8 +23,15 @@ const displayCountry = country => {
     </div>
   `;
   countryInfoEl.innerHTML = countryInfo;
-  console.log(countryInfo);
 };
+
+displayCountry({
+  name: { common: "Ukraine" },
+  capital: "Kyiv",
+  population: 41660960,
+  languages: [{ name: "Ukrainian" }],
+  flags: { png: "https://flagcdn.com/w320/ua.png" },
+});
 
 searchEl.addEventListener(
   "input",
@@ -54,7 +61,8 @@ searchEl.addEventListener(
           return;
         }
         if (countries.length === 1) {
-          displayCountry(country[0]);
+          console.log(countries);
+          displayCountry(countries);
           countryListEl.innerHTML = "";
           return;
         }
